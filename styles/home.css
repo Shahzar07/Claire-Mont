@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Claremont Cooling — home page sections
+   Claremont Cooling — home page sections (imported by app/layout.tsx)
    Depends on the tokens and components defined in style.css.
    ========================================================================== */
 
@@ -761,7 +761,7 @@
   transition-delay: 0s;
 }
 
-/* No JS (or main.js failed): list the reviews one after another */
+/* No JS (or lib/site.js failed): list the reviews one after another */
 html:not(.js) .tm-slide,
 .js-fallback .tm-slide { grid-area: auto; opacity: 1; visibility: visible; translate: none; }
 html:not(.js) .tm-slide + .tm-slide,

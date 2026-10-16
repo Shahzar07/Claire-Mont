@@ -1024,7 +1024,7 @@ button {
   overflow: hidden;
 }
 
-/* If main.js never initialises, show every panel so no content is stranded */
+/* If lib/site.js never initialises, show every panel so no content is stranded */
 .js-fallback .acc-panel {
   grid-template-rows: 1fr;
   visibility: visible;
@@ -1377,7 +1377,7 @@ html:not(.js) .survey-step + .survey-step,
 .js .survey-form.is-last [data-survey-submit] { display: inline-flex; }
 .js .survey-form.is-first [data-survey-back] { visibility: hidden; }
 
-/* main.js failed to load: fall back to the single long form */
+/* lib/site.js failed to load: fall back to the single long form */
 .js-fallback .survey-step:not(.is-active) { display: block; }
 .js-fallback .survey-form [data-survey-back],
 .js-fallback .survey-form [data-survey-next] { display: none; }
@@ -2164,7 +2164,7 @@ html:not(.js) .survey-step + .survey-step,
 /* --------------------------------------------------------------------------
    16. Scroll reveal
    Content is only hidden when JS is active (.js) and is forced visible if
-   main.js fails to initialise (.js-fallback) or motion is reduced.
+   lib/site.js fails to initialise (.js-fallback) or motion is reduced.
    -------------------------------------------------------------------------- */
 /* Uses the independent `translate` property so it never fights with
    hover effects that use `transform` on the same element. */
