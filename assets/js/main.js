@@ -691,6 +691,107 @@
   }
 
   /* ------------------------------------------------------------------------
+     Testimonials: one featured review at a time. Autoplay is driven by the
+     progress bar's CSS animation (its animationend advances the slide), so
+     pausing on hover/focus/off-screen just pauses the animation. No autoplay
+     when the visitor prefers reduced motion.
+     ------------------------------------------------------------------------ */
+  function initTestimonials() {
+    $$('[data-testimonials]').forEach(function (stage) {
+      var slides = $$('[data-tm-slide]', stage);
+      if (slides.length < 2) return;
+      var people = $$('[data-tm-go]', stage);
+      var count = $('[data-tm-count]', stage);
+      var bar = $('[data-tm-progress]', stage);
+      var toggle = $('[data-tm-toggle]', stage);
+      var live = $('[data-tm-slides]', stage);
+      var index = 0;
+      var stopped = reducedMotion.matches;
+      var holds = {};
+      var touchX = null;
+
+      function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+      function setHold(reason, on) {
+        if (on) holds[reason] = true; else delete holds[reason];
+        stage.classList.toggle('is-paused', Object.keys(holds).length > 0);
+      }
+
+      function restartBar() {
+        if (!bar) return;
+        bar.classList.remove('is-running');
+        if (stopped) return;
+        void bar.offsetWidth; // restart the CSS animation
+        bar.classList.add('is-running');
+      }
+
+      function go(i, fromUser) {
+        index = (i + slides.length) % slides.length;
+        slides.forEach(function (slide, n) { slide.classList.toggle('is-active', n === index); });
+        people.forEach(function (btn, n) {
+          btn.classList.toggle('is-active', n === index);
+          if (n === index) btn.setAttribute('aria-current', 'true'); else btn.removeAttribute('aria-current');
+        });
+        if (count) count.textContent = pad(index + 1) + ' / ' + pad(slides.length);
+        // Announce only changes the visitor asked for, not autoplay ticks
+        if (live) live.setAttribute('aria-live', fromUser ? 'polite' : 'off');
+        restartBar();
+      }
+
+      function setStopped(value) {
+        stopped = value;
+        if (toggle) {
+          toggle.setAttribute('aria-label', stopped ? 'Play automatic slideshow' : 'Pause automatic slideshow');
+          $('use', toggle).setAttribute('href', stopped ? '#i-play' : '#i-pause');
+        }
+        restartBar();
+      }
+
+      if (bar) bar.addEventListener('animationend', function () { go(index + 1, false); });
+
+      $('[data-tm-prev]', stage).addEventListener('click', function () { go(index - 1, true); });
+      $('[data-tm-next]', stage).addEventListener('click', function () { go(index + 1, true); });
+      people.forEach(function (btn) {
+        btn.addEventListener('click', function () { go(+btn.getAttribute('data-tm-go'), true); });
+      });
+      // Reduced motion: no autoplay at all, so the play/pause control is not needed
+      if (toggle && reducedMotion.matches) toggle.hidden = true;
+      else if (toggle) toggle.addEventListener('click', function () { setStopped(!stopped); });
+
+      stage.addEventListener('mouseenter', function () { setHold('hover', true); });
+      stage.addEventListener('mouseleave', function () { setHold('hover', false); });
+      stage.addEventListener('focusin', function () { setHold('focus', true); });
+      stage.addEventListener('focusout', function (event) {
+        if (!stage.contains(event.relatedTarget)) setHold('focus', false);
+      });
+
+      stage.addEventListener('keydown', function (event) {
+        if (event.key === 'ArrowLeft') { event.preventDefault(); go(index - 1, true); }
+        else if (event.key === 'ArrowRight') { event.preventDefault(); go(index + 1, true); }
+      });
+
+      // Swipe on touch screens
+      stage.addEventListener('touchstart', function (event) { touchX = event.touches[0].clientX; }, { passive: true });
+      stage.addEventListener('touchend', function (event) {
+        if (touchX === null) return;
+        var dx = event.changedTouches[0].clientX - touchX;
+        touchX = null;
+        if (Math.abs(dx) > 45) go(index + (dx < 0 ? 1 : -1), true);
+      }, { passive: true });
+
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          setHold('offscreen', !entries[0].isIntersecting);
+        }, { threshold: 0.3 }).observe(stage);
+      }
+      document.addEventListener('visibilitychange', function () { setHold('hidden', document.hidden); });
+
+      setStopped(stopped);
+      go(0, false);
+    });
+  }
+
+  /* ------------------------------------------------------------------------
      Footer year
      ------------------------------------------------------------------------ */
   function initYear() {
@@ -705,6 +806,7 @@
     initSurveyForm();
     initVideos();
     initCarousels();
+    initTestimonials();
     initPlannedLinks();
     initSmoothScroll();
     initMobileCta();
