@@ -3,7 +3,7 @@ import { site } from '@/lib/site-config';
 /**
  * Navigation note (Phase 1):
  * Links marked data-planned point at the routes planned for Phase 2. Until a page
- * exists, lib/site.js shows a "coming soon" notice instead of a 404. Once a page is
+ * exists, lib/site.js shows contact options instead of a 404. Once a page is
  * built, remove data-planned from every link that points to it.
  */
 export default function SiteHeader() {

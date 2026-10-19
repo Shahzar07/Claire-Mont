@@ -5,7 +5,6 @@ export default function CaseStudy() {
         <div className="video-card video-card--feature" data-video="" data-video-src="" data-video-title="Featured case study" data-reveal="image">
           <img className="video-card__poster" src="/assets/images/home/video-case-study.jpg" alt="" width="1200" height="846" loading="lazy" decoding="async" />
           <button className="video-card__play" type="button" aria-label="Play video: featured case study" data-video-play="" hidden><svg className="icon"><use href="#i-play" /></svg></button>
-          <span className="video-card__soon"><span className="video-card__soon-icon"><svg className="icon"><use href="#i-video" /></svg></span>Video coming soon</span>
         </div>
 
         <div className="case-study__content">

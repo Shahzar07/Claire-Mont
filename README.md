@@ -37,7 +37,7 @@ npm start        # serve the production build
 
 - **Reviews are samples.** The quotes, names and 5.0 Google rating in `components/Testimonials.tsx` were written to show the layout. Replace them with genuine reviews: publishing invented reviews is unlawful in the UK (DMCC Act 2024).
 - **Videos:** add a YouTube link or `.mp4` path to `data-video-src` on any video card (`CustomerStories`, `CaseStudy`, `BehindTheScenes`) and its play button appears automatically.
-- **Planned pages:** links marked `data-planned` show a "coming soon" notice instead of a 404. Remove the attribute once the page exists.
+- **Planned pages:** links marked `data-planned` show contact options instead of a 404. Remove the attribute once the page exists.
 
 ## Photography
 
