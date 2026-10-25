@@ -15,7 +15,7 @@ export default function Services() {
             </div>
             <div className="service-card__body">
               <span className="service-card__icon"><svg className="icon"><use href="#i-install" /></svg></span>
-              <h3 className="service-card__title"><a href="services/air-conditioning-installation.html" data-planned="">Air Conditioning Installation</a></h3>
+              <h3 className="service-card__title"><a href="/services/air-conditioning-installation">Air Conditioning Installation</a></h3>
               <p>Efficient wall, floor, ducted and cassette systems, sized for the room and fitted neatly.</p>
               <span className="link-arrow" aria-hidden="true">Explore Service <svg className="icon"><use href="#i-arrow" /></svg></span>
             </div>
@@ -27,7 +27,7 @@ export default function Services() {
             </div>
             <div className="service-card__body">
               <span className="service-card__icon"><svg className="icon"><use href="#i-wrench" /></svg></span>
-              <h3 className="service-card__title"><a href="services/air-conditioning-repair.html" data-planned="">Air Conditioning Repairs</a></h3>
+              <h3 className="service-card__title"><a href="/services/air-conditioning-repair">Air Conditioning Repairs</a></h3>
               <p>Fault finding and repairs on most makes, with the price agreed before any work starts.</p>
               <span className="link-arrow" aria-hidden="true">Explore Service <svg className="icon"><use href="#i-arrow" /></svg></span>
             </div>
@@ -39,7 +39,7 @@ export default function Services() {
             </div>
             <div className="service-card__body">
               <span className="service-card__icon"><svg className="icon"><use href="#i-calendar" /></svg></span>
-              <h3 className="service-card__title"><a href="services/air-conditioning-maintenance.html" data-planned="">Air Conditioning Maintenance</a></h3>
+              <h3 className="service-card__title"><a href="/services/air-conditioning-maintenance">Air Conditioning Maintenance</a></h3>
               <p>Annual servicing that keeps filters clean, running costs down and the warranty intact.</p>
               <span className="link-arrow" aria-hidden="true">Explore Service <svg className="icon"><use href="#i-arrow" /></svg></span>
             </div>
@@ -48,7 +48,7 @@ export default function Services() {
 
         <div className="careplan" data-reveal="">
           <span className="careplan__icon"><svg className="icon"><use href="#i-calendar" /></svg></span>
-          <p className="careplan__text"><strong>Already have air conditioning?</strong> Our <a className="text-link" href="care-plans.html" data-planned="">Care Plans</a> cover planned annual servicing, with every visit kept on record.</p>
+          <p className="careplan__text"><strong>Already have air conditioning?</strong> Our <a className="text-link" href="/care-plans">Care Plans</a> cover planned annual servicing, with every visit kept on record.</p>
           <a className="btn btn--flame" href="/#survey">Book Your E-Survey <svg className="icon"><use href="#i-arrow" /></svg></a>
         </div>
       </div>

@@ -28,8 +28,8 @@ export default function CaseStudy() {
             </li>
           </ul>
           <div className="case-study__actions" data-reveal="">
-            <a className="btn btn--primary" href="case-studies.html" data-planned="" data-label="Case Studies">Read the Case Study <svg className="icon"><use href="#i-arrow" /></svg></a>
-            <a className="btn btn--outline" href="blog.html" data-planned="" data-label="Blog">Read the Full Story</a>
+            <a className="btn btn--primary" href="/case-studies/two-room-home">Read the Case Study <svg className="icon"><use href="#i-arrow" /></svg></a>
+            <a className="btn btn--outline" href="/blog/why-we-film-projects-before-and-after">Read the Full Story</a>
           </div>
         </div>
       </div>

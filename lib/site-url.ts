@@ -1,0 +1,10 @@
+/** Absolute site origin for canonical URLs, the sitemap and social metadata. */
+export function getSiteUrl() {
+  const url =
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : 'http://localhost:3000');
+
+  return url.replace(/\/$/, '');
+}
