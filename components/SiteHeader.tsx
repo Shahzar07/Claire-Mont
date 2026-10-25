@@ -1,10 +1,8 @@
 import { site } from '@/lib/site-config';
 
 /**
- * Navigation note (Phase 1):
- * Links marked data-planned point at the routes planned for Phase 2. Until a page
- * exists, lib/site.js shows contact options instead of a 404. Once a page is
- * built, remove data-planned from every link that points to it.
+ * Links are root-relative so the same header works on the homepage and on
+ * nested pages. lib/site.js marks the link for the current URL.
  */
 export default function SiteHeader() {
   return (
@@ -29,13 +27,13 @@ export default function SiteHeader() {
               </button>
               <div className="dropdown" id="dd-services">
                 <ul className="dropdown__list">
-                  <li><a className="dropdown__link" href="services/residential-air-conditioning.html" data-planned=""><span className="dropdown__icon"><svg className="icon"><use href="#i-home" /></svg></span>Residential A/C</a></li>
-                  <li><a className="dropdown__link" href="services/commercial-air-conditioning.html" data-planned=""><span className="dropdown__icon"><svg className="icon"><use href="#i-building" /></svg></span>Commercial A/C</a></li>
-                  <li><a className="dropdown__link" href="services/air-conditioning-installation.html" data-planned=""><span className="dropdown__icon"><svg className="icon"><use href="#i-install" /></svg></span>A/C Installation</a></li>
-                  <li><a className="dropdown__link" href="services/air-conditioning-replacement.html" data-planned=""><span className="dropdown__icon"><svg className="icon"><use href="#i-refresh" /></svg></span>A/C Replacement</a></li>
-                  <li><a className="dropdown__link" href="services/air-conditioning-repair.html" data-planned=""><span className="dropdown__icon"><svg className="icon"><use href="#i-wrench" /></svg></span>A/C Repair</a></li>
-                  <li><a className="dropdown__link" href="services/air-conditioning-maintenance.html" data-planned=""><span className="dropdown__icon"><svg className="icon"><use href="#i-calendar" /></svg></span>A/C Maintenance</a></li>
-                  <li className="dropdown__all"><a className="dropdown__link" href="services.html" data-planned="">View All Services <svg className="icon"><use href="#i-arrow" /></svg></a></li>
+                  <li><a className="dropdown__link" href="/services/residential-air-conditioning"><span className="dropdown__icon"><svg className="icon"><use href="#i-home" /></svg></span>Residential A/C</a></li>
+                  <li><a className="dropdown__link" href="/services/commercial-air-conditioning"><span className="dropdown__icon"><svg className="icon"><use href="#i-building" /></svg></span>Commercial A/C</a></li>
+                  <li><a className="dropdown__link" href="/services/air-conditioning-installation"><span className="dropdown__icon"><svg className="icon"><use href="#i-install" /></svg></span>A/C Installation</a></li>
+                  <li><a className="dropdown__link" href="/services/air-conditioning-replacement"><span className="dropdown__icon"><svg className="icon"><use href="#i-refresh" /></svg></span>A/C Replacement</a></li>
+                  <li><a className="dropdown__link" href="/services/air-conditioning-repair"><span className="dropdown__icon"><svg className="icon"><use href="#i-wrench" /></svg></span>A/C Repair</a></li>
+                  <li><a className="dropdown__link" href="/services/air-conditioning-maintenance"><span className="dropdown__icon"><svg className="icon"><use href="#i-calendar" /></svg></span>A/C Maintenance</a></li>
+                  <li className="dropdown__all"><a className="dropdown__link" href="/services">View All Services <svg className="icon"><use href="#i-arrow" /></svg></a></li>
                 </ul>
               </div>
             </li>
@@ -46,13 +44,13 @@ export default function SiteHeader() {
               </button>
               <div className="dropdown" id="dd-ac-types">
                 <ul className="dropdown__list">
-                  <li><a className="dropdown__link" href="ac-types/wall-mount.html" data-planned=""><span className="dropdown__icon"><svg className="icon"><use href="#i-wall" /></svg></span>Wall Mount</a></li>
-                  <li><a className="dropdown__link" href="ac-types/floor-standing.html" data-planned=""><span className="dropdown__icon"><svg className="icon"><use href="#i-floor" /></svg></span>Floor Standing</a></li>
-                  <li><a className="dropdown__link" href="ac-types/ducted.html" data-planned=""><span className="dropdown__icon"><svg className="icon"><use href="#i-ducted" /></svg></span>Ducted</a></li>
-                  <li><a className="dropdown__link" href="ac-types/cassette.html" data-planned=""><span className="dropdown__icon"><svg className="icon"><use href="#i-cassette" /></svg></span>Cassette</a></li>
-                  <li><a className="dropdown__link" href="ac-types/vrv-vrf.html" data-planned=""><span className="dropdown__icon"><svg className="icon"><use href="#i-vrv" /></svg></span>VRV/VRF</a></li>
-                  <li><a className="dropdown__link" href="ac-types/ceiling-suspended.html" data-planned=""><span className="dropdown__icon"><svg className="icon"><use href="#i-ceiling" /></svg></span>Ceiling Suspended</a></li>
-                  <li className="dropdown__all"><a className="dropdown__link" href="ac-types.html" data-planned="">View All AC Types <svg className="icon"><use href="#i-arrow" /></svg></a></li>
+                  <li><a className="dropdown__link" href="/ac-types/wall-mount"><span className="dropdown__icon"><svg className="icon"><use href="#i-wall" /></svg></span>Wall Mount</a></li>
+                  <li><a className="dropdown__link" href="/ac-types/floor-standing"><span className="dropdown__icon"><svg className="icon"><use href="#i-floor" /></svg></span>Floor Standing</a></li>
+                  <li><a className="dropdown__link" href="/ac-types/ducted"><span className="dropdown__icon"><svg className="icon"><use href="#i-ducted" /></svg></span>Ducted</a></li>
+                  <li><a className="dropdown__link" href="/ac-types/cassette"><span className="dropdown__icon"><svg className="icon"><use href="#i-cassette" /></svg></span>Cassette</a></li>
+                  <li><a className="dropdown__link" href="/ac-types/vrv-vrf"><span className="dropdown__icon"><svg className="icon"><use href="#i-vrv" /></svg></span>VRV/VRF</a></li>
+                  <li><a className="dropdown__link" href="/ac-types/ceiling-suspended"><span className="dropdown__icon"><svg className="icon"><use href="#i-ceiling" /></svg></span>Ceiling Suspended</a></li>
+                  <li className="dropdown__all"><a className="dropdown__link" href="/ac-types">View All AC Types <svg className="icon"><use href="#i-arrow" /></svg></a></li>
                 </ul>
               </div>
             </li>
@@ -63,21 +61,21 @@ export default function SiteHeader() {
               </button>
               <div className="dropdown" id="dd-brands">
                 <ul className="dropdown__list">
-                  <li><a className="dropdown__link" href="brands/daikin-sensira.html" data-planned=""><span className="dropdown__icon"><svg className="icon"><use href="#i-wall" /></svg></span>Daikin Sensira</a></li>
-                  <li><a className="dropdown__link" href="brands/daikin-perfera.html" data-planned=""><span className="dropdown__icon"><svg className="icon"><use href="#i-wall" /></svg></span>Daikin Perfera</a></li>
-                  <li><a className="dropdown__link" href="brands/daikin-perfera-floor-standing.html" data-planned=""><span className="dropdown__icon"><svg className="icon"><use href="#i-floor" /></svg></span>Daikin Perfera Floor Standing</a></li>
-                  <li><a className="dropdown__link" href="brands/daikin-stylish.html" data-planned=""><span className="dropdown__icon"><svg className="icon"><use href="#i-wall" /></svg></span>Daikin Stylish</a></li>
-                  <li className="dropdown__all"><a className="dropdown__link" href="brands.html" data-planned="">View All Brands <svg className="icon"><use href="#i-arrow" /></svg></a></li>
+                  <li><a className="dropdown__link" href="/brands/daikin-sensira"><span className="dropdown__icon"><svg className="icon"><use href="#i-wall" /></svg></span>Daikin Sensira</a></li>
+                  <li><a className="dropdown__link" href="/brands/daikin-perfera"><span className="dropdown__icon"><svg className="icon"><use href="#i-wall" /></svg></span>Daikin Perfera</a></li>
+                  <li><a className="dropdown__link" href="/brands/daikin-perfera-floor-standing"><span className="dropdown__icon"><svg className="icon"><use href="#i-floor" /></svg></span>Daikin Perfera Floor Standing</a></li>
+                  <li><a className="dropdown__link" href="/brands/daikin-stylish"><span className="dropdown__icon"><svg className="icon"><use href="#i-wall" /></svg></span>Daikin Stylish</a></li>
+                  <li className="dropdown__all"><a className="dropdown__link" href="/brands">View All Brands <svg className="icon"><use href="#i-arrow" /></svg></a></li>
                 </ul>
               </div>
             </li>
 
-            <li className="nav-item"><a className="nav-link" href="locations.html" data-planned="">Locations</a></li>
-            <li className="nav-item"><a className="nav-link" href="gallery.html" data-planned="">Gallery</a></li>
-            <li className="nav-item"><a className="nav-link" href="reviews.html" data-planned="">Reviews</a></li>
-            <li className="nav-item"><a className="nav-link" href="care-plans.html" data-planned="">Care Plans</a></li>
-            <li className="nav-item"><a className="nav-link" href="blog.html" data-planned="">Blog</a></li>
-            <li className="nav-item"><a className="nav-link" href="refer-a-friend.html" data-planned="">Refer A Friend</a></li>
+            <li className="nav-item"><a className="nav-link" href="/locations">Locations</a></li>
+            <li className="nav-item"><a className="nav-link" href="/gallery">Gallery</a></li>
+            <li className="nav-item"><a className="nav-link" href="/reviews">Reviews</a></li>
+            <li className="nav-item"><a className="nav-link" href="/care-plans">Care Plans</a></li>
+            <li className="nav-item"><a className="nav-link" href="/blog">Blog</a></li>
+            <li className="nav-item"><a className="nav-link" href="/refer-a-friend">Refer A Friend</a></li>
           </ul>
 
           <div className="site-nav__foot">

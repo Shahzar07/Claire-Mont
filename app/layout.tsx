@@ -1,20 +1,34 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { site } from '@/lib/site-config';
+import { getSiteUrl } from '@/lib/site-url';
 import '@/styles/style.css';
 import '@/styles/home.css';
+import '@/styles/pages.css';
 
 // Absolute base for social images. On Vercel this is the production domain;
 // set NEXT_PUBLIC_SITE_URL to override (e.g. once a custom domain is live).
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : 'http://localhost:3000');
+const siteUrl = getSiteUrl();
+
+const businessJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HVACBusiness',
+  name: site.name,
+  url: siteUrl,
+  telephone: '+447764936622',
+  email: site.email,
+  image: `${siteUrl}/assets/images/logo.jpg`,
+  areaServed: 'United Kingdom',
+  description:
+    'Air conditioning installation, repair and maintenance for homes and businesses, plus heating, indoor air quality and HVAC servicing.',
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'Claremont Cooling | Air Conditioning Installation, Repair & Maintenance',
+  title: {
+    default: 'Claremont Cooling | Air Conditioning Installation, Repair & Maintenance',
+    template: '%s | Claremont Cooling',
+  },
   description: `Claremont Cooling provides ultra-quiet air conditioning for homes and businesses, with seamless installation, spotless clean-up and reliable maintenance. Call ${site.phone}.`,
   openGraph: {
     type: 'website',
@@ -47,7 +61,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(businessJsonLd) }} />
+        {children}
+      </body>
     </html>
   );
 }
