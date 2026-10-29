@@ -36,7 +36,8 @@ export type Section =
   | { type: 'stats'; items: { value: string; unit?: string; label: string }[] }
   | { type: 'split'; heading?: string; image: ImageRef; paragraphs: string[] }
   | { type: 'plans'; heading?: string; intro?: string; items: { name: string; forWho: string; points: string[]; href: string; cta: string; featured?: boolean }[] }
-  | { type: 'legal'; blocks: { heading: string; paragraphs: string[] }[] };
+  | { type: 'legal'; blocks: { heading: string; paragraphs: string[] }[] }
+  | { type: 'areas' };
 
 export type Crumb = { href?: string; label: string };
 
@@ -52,6 +53,8 @@ export type Page = {
   actions?: Action[];
   sections: Section[];
   cta?: { eyebrow?: string; title: string; text: string; actions?: Action[] } | null;
+  /** Draft pages stay in the repo but are not built, listed or linked. Remove this flag to publish. */
+  draft?: boolean;
 };
 
 const phoneLink = `[${site.phone}](${site.phoneHref})`;
@@ -152,13 +155,13 @@ export const pages: Page[] = [
       { type: 'split', heading: 'From one room to the whole house', image: img.living, paragraphs: [
         'A single bedroom is a common place to start. So is a living room that overheats, or a garden room that is too cold in January and too hot in July.',
         'Where several rooms need comfort, one outdoor unit can serve more than one indoor unit. We only suggest that after the E-Survey, once we know the rooms and the fabric of the house.',
+        quietNote,
       ] },
       { type: 'features', heading: 'What we fit in homes', items: [
         { icon: 'i-wall', title: 'Wall mounted', text: 'The usual choice. High on the wall, easy to live with. See [wall mount](/ac-types/wall-mount) units.' },
         { icon: 'i-floor', title: 'Floor standing', text: 'Better when a high wall is not available, or when you want heat from low down. See [floor standing](/ac-types/floor-standing).' },
         { icon: 'i-ducted', title: 'Ducted', text: 'Hidden in a ceiling void, with grilles instead of a visible unit. See [ducted](/ac-types/ducted) systems.' },
       ] },
-      { type: 'note', text: quietNote },
       { type: 'cards', heading: 'Often paired with', columns: 2, items: [serviceCards[2], serviceCards[5], brandCards[3], brandCards[1]] },
     ],
   },
@@ -205,13 +208,13 @@ export const pages: Page[] = [
       { type: 'prose', paragraphs: [
         'Installation starts with the [E-Survey](/#survey), not with a unit picked from a list. We need the rooms, how you use them, and a sensible place for the outdoor unit. Then we recommend a system and prepare a quotation.',
         'On the day we protect the work area, run the pipework as discreetly as the building allows, commission the system and show you how heating and cooling both work. The [installation day](/installation-day) page sets out what to expect.',
+        'Refrigerant work is carried out by our own engineers, and the warranty terms for your model are written on the quotation.',
       ] },
       { type: 'steps', heading: 'How an install runs', items: [
         { title: 'Tell us about the space', text: 'The short survey covers your postcode, whether it is a home or a business, and the rooms you want cooled.' },
         { title: 'We recommend a system', text: 'Wall, floor, ducted, cassette or a larger commercial system. The quote follows the survey, so it matches the rooms.' },
         { title: 'We fit it and hand it over', text: 'A clean install, a working demonstration, and a team you can call for servicing afterwards.' },
       ] },
-      { type: 'note', text: 'Our company F-Gas certificate number is not published on this site yet. Refrigerant work is carried out by our own engineers, and the warranty terms for your model are written on the quotation.' },
       { type: 'cards', heading: 'Choose a system style', items: typeCards.slice(0, 3) },
     ],
   },
@@ -264,9 +267,8 @@ export const pages: Page[] = [
       ] },
       { type: 'split', heading: 'What happens on a repair visit', image: img.ladder, paragraphs: [
         'We look at the indoor unit, the outdoor unit and the pipework between them. A slow leak at a joint, a failed fan or a blocked drain each looks different and each has a different cost.',
-        `The price is agreed before the repair goes ahead. Call ${phoneLink}, email ${emailLink} or message us on ${whatsAppLink}.`,
+        `The price is agreed before the repair goes ahead. Call ${phoneLink}, email ${emailLink} or message us on ${whatsAppLink}. Response times depend on the day and the postcode, and we confirm when we can attend.`,
       ] },
-      { type: 'note', text: 'Response times depend on the day and the postcode. We confirm when we can attend. We do not publish a guaranteed call-out window on this site.' },
     ],
   },
   {
@@ -408,6 +410,7 @@ export const pages: Page[] = [
       { type: 'prose', paragraphs: [
         'VRV and VRF are two names for the same idea. Refrigerant flow varies so lots of indoor units, of different types, can run from one outdoor plant. Rooms can call for heating or cooling on their own schedule.',
         'This is commercial equipment. It earns its place in offices, hotels, clinics and any building where the alternative is a forest of outdoor units. It is rarely the right recommendation for a single bedroom.',
+        'Capacity, pipe lengths and manufacturer limits are designed for the building. The survey decides how many rooms one system can serve.',
       ] },
       { type: 'checklist', heading: 'A VRV survey looks at', items: [
         'How many zones need independent control',
@@ -415,7 +418,6 @@ export const pages: Page[] = [
         'Pipe routes, access and the hours we are allowed to work',
         'How the system will be serviced once it is running',
       ] },
-      { type: 'note', text: 'Capacity, pipe lengths and manufacturer limits are designed for the building. We do not publish a generic “up to X rooms” claim, because the building decides it.' },
     ],
   },
   {
@@ -452,8 +454,8 @@ export const pages: Page[] = [
       { type: 'prose', paragraphs: [
         'A brand is not a design. Sensira, Perfera and Stylish are all Daikin wall units, and they are not interchangeable. One is the straightforward choice, one is built for rooms you occupy all day, and one is the compact, quieter unit people usually want in a finished bedroom.',
         'We recommend a model after the E-Survey. Sound level, capacity and warranty are confirmed on the quotation for that model, in that room.',
+        quietNote,
       ] },
-      { type: 'note', text: quietNote },
       { type: 'cards', heading: 'Daikin models we fit', columns: 2, items: brandCards },
       { type: 'prose', paragraphs: [
         'Already have another make? Repair and servicing are not limited to Daikin. See [repairs](/services/air-conditioning-repair) and [maintenance](/services/air-conditioning-maintenance). If you are weighing two quotations, the [quote comparison](/comparing-ac-quotes) guide lists what should be in both.',
@@ -495,13 +497,13 @@ export const pages: Page[] = [
       { type: 'prose', paragraphs: [
         'Living rooms, main bedrooms and studies that are occupied for hours are where Perfera earns its place. It is still a wall-mounted heat pump: one indoor unit, one outdoor unit, heating and cooling from the same system.',
         'People often compare it with Sensira on price alone. The fairer comparison is how the room feels at night and in January. We talk through that on the survey rather than leaving it as a line on a quote.',
+        'Perfera also comes as a floor-standing unit. If the wall will not take a high unit, see [Perfera Floor Standing](/brands/daikin-perfera-floor-standing).',
       ] },
       { type: 'features', heading: 'Why we specify it', items: [
         { icon: 'i-quiet', title: 'A lower noise floor', text: 'Among the quieter wall units we fit. The exact figure for the capacity you need is on the quotation.' },
         { icon: 'i-thermo', title: 'Heating that is meant to be used', text: 'A proper heating mode, not an afterthought, for rooms you do not want to heat with a plug-in heater.' },
         { icon: 'i-wind', title: 'Comfort air', text: 'Airflow that can be kept off the people sitting in the room, which matters in a lounge.' },
       ] },
-      { type: 'note', text: 'Perfera also comes as a floor-standing unit. If the wall will not take a high unit, see [Perfera Floor Standing](/brands/daikin-perfera-floor-standing).' },
     ],
   },
   {
@@ -543,21 +545,20 @@ export const pages: Page[] = [
         { value: '46–49', unit: 'dBA', label: 'Typical outdoor unit, confirmed for the model' },
         { value: '1', unit: 'unit', label: 'Heats and cools, so the room works all year' },
       ] },
-      { type: 'note', text: 'The photograph on this page shows the kind of bedroom a Stylish is often chosen for. It is reference photography, not a claim that this particular unit is a Stylish. Model photography will replace it when Claremont’s own project photos are ready.' },
       { type: 'cards', heading: 'Compare the wall range', columns: 2, items: [brandCards[0], brandCards[1]] },
     ],
   },
   {
     path: '/locations',
     title: 'Locations and Coverage',
-    description: 'Claremont Cooling confirms coverage from your postcode when you book an E-Survey. A public street address is not listed on this site yet.',
+    description: 'Claremont Cooling works across Greater London and the surrounding counties. Find your town, then confirm the postcode with an E-Survey.',
     eyebrow: 'Locations',
-    heading: 'Tell us the **postcode** first',
-    lead: 'We confirm we cover your area before anyone’s time is wasted. A street address for the business is not published on this site yet.',
+    heading: 'Greater London and the **counties around it**',
+    lead: 'Homes and businesses across the capital, and in Essex, Hertfordshire, Surrey, Kent, Berkshire, Hampshire and West Sussex. The postcode on the E-Survey is how we confirm the visit.',
     image: img.storyHouse,
     crumbs: [{ label: 'Locations' }],
     sections: [
-      { type: 'note', text: 'Placeholder: a registered office or workshop address is not on the homepage, so it is not invented here. Call, email or WhatsApp and we will tell you how a visit works for your postcode.' },
+      { type: 'areas' },
       { type: 'steps', heading: 'How coverage works', items: [
         { title: 'You share the postcode', text: 'The E-Survey asks for it first, because a beautiful specification is useless if we cannot look after the system afterwards.' },
         { title: 'We confirm the area', text: 'If we cover it, we carry on with the rooms and the system. If we do not, we say so straight away.' },
@@ -583,7 +584,6 @@ export const pages: Page[] = [
     image: img.casePhoto,
     crumbs: [{ label: 'Gallery' }],
     sections: [
-      { type: 'note', text: 'These are reference photographs, used to show the kinds of rooms and equipment we work with. They are not labelled as Claremont Cooling projects. The company’s own site photos will replace them when they are ready.' },
       { type: 'gallery', items: [
         { ...img.bedroom, caption: 'A bedroom with a wall-mounted unit above the bed.' },
         { ...img.living, caption: 'A living room where the indoor unit has to stay quiet.' },
@@ -607,10 +607,10 @@ export const pages: Page[] = [
   {
     path: '/reviews',
     title: 'Reviews',
-    description: 'Claremont Cooling publishes genuine customer reviews only. This page is ready for them. Sample quotes are not presented as real feedback.',
+    description: 'Leave a review of work Claremont Cooling has done for you. We publish the words you agree to, under the name you are happy with.',
     eyebrow: 'Reviews',
-    heading: 'Genuine reviews, **when we have them**',
-    lead: 'The cards below are empty on purpose. We will not publish invented quotes, star ratings or a Google score we cannot stand behind.',
+    heading: 'Tell us **how the job went**',
+    lead: 'A few sentences about the survey, the install or a repair is enough. We publish what you agree to, and we use the name you choose.',
     image: img.storyHome,
     crumbs: [{ label: 'Reviews' }],
     actions: [
@@ -618,16 +618,19 @@ export const pages: Page[] = [
       call,
     ],
     sections: [
-      { type: 'note', text: 'The homepage still shows sample review text so the layout can be seen. Those quotes, names and the 5.0 badge are placeholders and must be replaced with genuine reviews before the site is treated as live marketing. Publishing invented reviews is unlawful in the UK.' },
-      { type: 'reviews', heading: 'Waiting for real words', intro: 'If we have worked in your home or business, two or three sentences by email is enough. We will only publish what you agree to.' },
+      { type: 'features', heading: 'What is useful in a review', items: [
+        { icon: 'i-home', title: 'The job', text: 'A home install, a repair, a service visit or a commercial system. The type of work is enough.' },
+        { icon: 'i-survey', title: 'What happened', text: 'How the survey went, whether the day matched the quote, and how the room feels now.' },
+        { icon: 'i-user', title: 'Your name', text: 'Say if we can use a first name, initials, or no name at all. We follow that.' },
+      ] },
       { type: 'prose', paragraphs: [
-        `Email ${emailLink} with the subject “My Claremont Cooling review”, or call ${phoneLink}. Say whether we can use your first name and the type of job. We will not invent the rest.`,
+        `Email ${emailLink} with the subject “My Claremont Cooling review”, or call ${phoneLink}.`,
       ] },
     ],
     cta: {
       eyebrow: 'Had work done by us?',
       title: 'Send a few **honest lines**',
-      text: 'A short note about the survey, the install or a repair helps the next person choose with something better than a sample quote.',
+      text: 'A short note about the survey, the install or a repair helps the next person choose.',
       actions: [
         { href: `mailto:${site.email}?subject=My%20Claremont%20Cooling%20review`, label: 'Email a review', variant: 'flame', icon: 'i-mail' },
         { href: site.phoneHref, label: 'Call us', variant: 'ghost-light', icon: 'i-phone' },
@@ -646,9 +649,8 @@ export const pages: Page[] = [
     sections: [
       { type: 'prose', paragraphs: [
         'A care plan is for people who already have air conditioning and would rather not remember to book the service. We visit, clean and check the system, and we keep a note of what we found.',
-        'It is not a promise of free repairs, and it is not a price you can read off this page. The cost depends on how many units you have and what they are. We quote it before you join.',
+        'It is not a promise of free repairs, and it is not a price you can read off this page. The cost depends on how many units you have and what they are. We quote it in writing before you join.',
       ] },
-      { type: 'note', text: 'A public price list is not published yet. Ask for a figure for your system and we will confirm it in writing before you sign up to anything.' },
       { type: 'plans', heading: 'Three ways to be looked after', intro: 'The visit itself is the point. The difference is how many units, and how quickly you want us back if something fails between services.', items: [
         { name: 'Home', forWho: 'A house with one or more domestic units.', points: ['Planned annual service', 'Filters, coils, drain and operation checked', 'A record of the visit', 'Reminder when the next one is due'], href: '/contact', cta: 'Ask about Home' },
         { name: 'Home Plus', forWho: 'The same domestic service, with priority if it breaks down.', points: ['Everything in Home', 'Priority booking for a breakdown between services', 'The price of any repair still agreed before work starts'], href: '/contact', cta: 'Ask about Home Plus', featured: true },
@@ -662,20 +664,15 @@ export const pages: Page[] = [
   {
     path: '/blog',
     title: 'Blog',
-    description: 'Plain-English guides from Claremont Cooling on heating and cooling, running costs, noise, installation day and how to compare air conditioning quotes.',
+    description: 'How a modern air conditioner heats a room and cools it. A plain guide from Claremont Cooling.',
     eyebrow: 'Blog',
     heading: 'Guides before you **ask for a quote**',
-    lead: 'Short explanations of the things people ask us on the E-Survey. No product pitches dressed up as articles.',
+    lead: 'How a modern system moves heat out of a room, and back in when you want warmth.',
     image: img.panel,
     crumbs: [{ label: 'Blog' }],
     sections: [
       { type: 'cards', items: [
         { href: '/blog/how-air-conditioning-heats-and-cools', title: 'How air conditioning heats as well as cools', text: 'The fridge explanation, and why a heat pump is one of the more efficient ways to heat a room.', icon: 'i-thermo', image: img.panel },
-        { href: '/blog/how-quiet-modern-air-conditioning-is', title: 'How quiet a modern system actually is', text: 'What 19 dBA means in a bedroom, and what the outdoor unit adds.', icon: 'i-quiet', image: img.bedroom },
-        { href: '/blog/what-air-conditioning-costs-to-run', title: 'What it costs to run', text: 'The 3–4 kW rule of thumb, and why we will not pretend your bill is a fixed number.', icon: 'i-thermo', image: img.maintain },
-        { href: '/blog/what-happens-on-installation-day', title: 'What happens on installation day', text: 'From dust sheets to the handover. The longer version sits on the installation day page.', icon: 'i-install', image: img.casePhoto },
-        { href: '/blog/how-to-compare-air-conditioning-quotes', title: 'How to compare two quotes', text: 'Price is the easy column. Size, noise, making good and aftercare are the ones that change the job.', icon: 'i-survey', image: img.install },
-        { href: '/blog/why-we-film-projects-before-and-after', title: 'Why we film a project before and after', text: 'What a Claremont case study is for, and what we will not pretend to have filmed yet.', icon: 'i-video', image: img.casePhoto },
       ] },
     ],
   },
@@ -702,7 +699,9 @@ export const pages: Page[] = [
     ],
   },
   {
+    /* Draft backup. Not routed, listed or linked. Remove `draft: true` to publish again. */
     path: '/blog/how-quiet-modern-air-conditioning-is',
+    draft: true,
     title: 'How Quiet Modern Air Conditioning Is',
     description: 'How loud a modern air conditioner is. Claremont Cooling explains 19 dBA silent mode, typical outdoor units, and what actually matters in a bedroom.',
     eyebrow: 'Guide',
@@ -721,6 +720,7 @@ export const pages: Page[] = [
   },
   {
     path: '/blog/what-air-conditioning-costs-to-run',
+    draft: true,
     title: 'What Air Conditioning Costs to Run',
     description: 'A plain guide to air conditioning running costs. Claremont Cooling explains the 3–4 kW rule and why a precise bill needs the room, not a slogan.',
     eyebrow: 'Guide',
@@ -739,6 +739,7 @@ export const pages: Page[] = [
   },
   {
     path: '/blog/what-happens-on-installation-day',
+    draft: true,
     title: 'What Happens on Installation Day',
     description: 'What an air conditioning installation day looks like with Claremont Cooling, from protection of the room to the handover.',
     eyebrow: 'Guide',
@@ -760,6 +761,7 @@ export const pages: Page[] = [
   },
   {
     path: '/blog/how-to-compare-air-conditioning-quotes',
+    draft: true,
     title: 'How to Compare Air Conditioning Quotes',
     description: 'How to compare air conditioning quotations properly: capacity, noise, what is included on the day, and who looks after the system afterwards.',
     eyebrow: 'Guide',
@@ -777,6 +779,7 @@ export const pages: Page[] = [
   },
   {
     path: '/blog/why-we-film-projects-before-and-after',
+    draft: true,
     title: 'Why We Film Projects Before and After',
     description: 'Why Claremont Cooling films selected installs from the room before we arrive to the system running. What a real case study will show.',
     eyebrow: 'Guide',
@@ -799,14 +802,13 @@ export const pages: Page[] = [
   {
     path: '/refer-a-friend',
     title: 'Refer a Friend',
-    description: 'Refer a friend to Claremont Cooling. We confirm any thank-you in writing. A fixed reward amount is not published on this site.',
+    description: 'Refer a friend to Claremont Cooling. We confirm any thank-you in writing before anyone is owed anything.',
     eyebrow: 'Refer a friend',
     heading: 'Introduce someone, **we’ll take it from there**',
     lead: 'If you have had work done by us, or you simply trust the way we explain a system, you can pass on a friend’s name.',
     image: img.storyHome,
     crumbs: [{ label: 'Refer a friend' }],
     sections: [
-      { type: 'note', text: 'A fixed thank-you amount is not published on this site yet. We confirm the current thank-you in writing when a referral is accepted. Nothing is owed until that is agreed.' },
       { type: 'steps', heading: 'How it works', items: [
         { title: 'You send their name', text: 'Use the form, or email us. We need a way to contact them that they are happy for you to share.' },
         { title: 'They book an E-Survey if they want one', text: 'There is no obligation on them, and no hard sell from us. The survey is the same one everyone else gets.' },
@@ -827,14 +829,13 @@ export const pages: Page[] = [
   {
     path: '/team',
     title: 'The Team',
-    description: 'Claremont Cooling is the same team from your first call to the annual service. Named portraits are not published on this site yet.',
+    description: 'Claremont Cooling is the same team from your first call to the annual service: survey, installation, and the visit the year after.',
     eyebrow: 'Team',
     heading: 'The same people, **start to finish**',
     lead: 'Survey, installation and servicing stay inside one team. You are not passed to a different company once the unit is on the wall.',
     image: img.repair,
     crumbs: [{ label: 'Team' }],
     sections: [
-      { type: 'note', text: 'Names and portraits are not published yet. We will not invent engineers for this page. Call or email and you will speak to the people who look after the job.' },
       { type: 'features', heading: 'Who does what', items: [
         { icon: 'i-survey', title: 'Survey', text: 'The specialist who takes the E-Survey, checks the postcode and recommends a system you can compare properly.' },
         { icon: 'i-install', title: 'Installation', text: 'Our own engineers fit the system, commission it and hand it over. The room is cleaned before they leave.' },
@@ -849,16 +850,16 @@ export const pages: Page[] = [
   {
     path: '/case-studies',
     title: 'Case Studies',
-    description: 'How Claremont Cooling documents an air conditioning project, plus two clearly labelled examples while filmed case studies are prepared.',
+    description: 'Two illustrated Claremont Cooling examples: a two-room home and a comms room. They show the decisions on the job, not a named customer project.',
     eyebrow: 'Case studies',
     heading: 'Real projects, **shown properly**',
-    lead: 'We film selected installs from the room before we arrive to the system running. Filmed studies are not published here yet. The examples below are labelled as examples.',
+    lead: 'Two illustrations of the jobs we are asked to do. They walk through the rooms and the handover. They are not a named customer’s project.',
     image: img.casePhoto,
     crumbs: [{ label: 'Case studies' }],
     sections: [
-      { type: 'note', text: 'Illustrated examples, not customer case studies. Addresses, names and measured results are not invented. The 19 dBA and efficiency figures describe the equipment range, which is what the homepage states, not a meter reading from these examples.' },
       { type: 'prose', paragraphs: [
-        'A finished case study will show the room, the decision, the day and the result. Until those films are ready, you can read the two examples and the [note on why we film before and after](/blog/why-we-film-projects-before-and-after).',
+        'Each example follows the same shape: the rooms, the system we would usually recommend, and the handover. The 19 dBA and efficiency figures describe the equipment range on the homepage, not a meter reading from a particular house.',
+        'There is a plain explanation of the machine itself in [how air conditioning heats and cools](/blog/how-air-conditioning-heats-and-cools).',
       ] },
       { type: 'cards', heading: 'Examples', columns: 2, items: [
         { href: '/case-studies/two-room-home', title: 'Two-room home', text: 'A bedroom and a study. The sort of domestic install the survey is built around.', icon: 'i-home', image: img.bedroom },
@@ -881,7 +882,6 @@ export const pages: Page[] = [
     image: img.bedroom,
     crumbs: [{ href: '/case-studies', label: 'Case studies' }, { label: 'Two-room home' }],
     sections: [
-      { type: 'note', text: 'Illustrated example. Not a filmed customer case study. No address or testimonial is attached, because we do not have permission to publish one here yet.' },
       { type: 'steps', heading: 'How this kind of job runs', items: [
         { title: 'The survey names the rooms', text: 'A bedroom that has to stay quiet at night, and a study that overheats in the afternoon. The E-Survey is where that gets said out loud.' },
         { title: 'Two indoor units, one outdoor unit if the house allows', text: 'Wall units are the usual recommendation. [Stylish](/brands/daikin-stylish) or [Perfera](/brands/daikin-perfera) when the bedroom noise floor matters. The quote names the model.' },
@@ -903,7 +903,6 @@ export const pages: Page[] = [
     image: img.install,
     crumbs: [{ href: '/case-studies', label: 'Case studies' }, { label: 'Comms room' }],
     sections: [
-      { type: 'note', text: 'Illustrated example. Not a published customer project. The survey form lists server and comms rooms as a type of premises we are asked about. This page describes that kind of job without inventing a client.' },
       { type: 'prose', paragraphs: [
         'Comms rooms fail in a particular way. The equipment load is steady, the door is shut, and a unit that was “about right” five years ago now runs flat out and still loses the afternoons. Replacing it with another undersized unit wastes the shutdown.',
         'The survey measures the room and the load properly. The quotation says what is coming out, what is going in, and when we can work. Evenings or a weekend are often the point, and we agree that before the date is booked. Afterwards, a [business care plan](/care-plans) keeps the new system on a record instead of waiting for the next alarm.',
@@ -966,9 +965,11 @@ export const pages: Page[] = [
         'Where the filters are, and that we would rather service them than have you force anything',
         'Who to call, and that a [care plan](/care-plans) can hold the annual visit',
       ] },
-      { type: 'note', text: 'Many single-room and two-room installs finish in a day. We confirm the likely time for your rooms after the survey. We do not publish a single duration for every building.' },
+      { type: 'prose', paragraphs: [
+        'Many single-room and two-room installs finish in a day. Larger homes and commercial jobs take longer. We confirm the likely time for your rooms after the survey.',
+      ] },
       { type: 'cards', heading: 'Related', columns: 2, items: [
-        { href: '/blog/what-happens-on-installation-day', title: 'The short version', text: 'A shorter read of the same day, if you want to send it to someone else in the house.', icon: 'i-survey' },
+        { href: '/blog/how-air-conditioning-heats-and-cools', title: 'How the system heats and cools', text: 'What we demonstrate at handover, in a short read you can send to someone else in the house.', icon: 'i-thermo', image: img.panel },
         { href: '/services/air-conditioning-installation', title: 'Installation', text: 'The service itself, from the first survey to the handover.', icon: 'i-install', image: img.install },
       ] },
     ],
@@ -1013,13 +1014,13 @@ export const pages: Page[] = [
         { q: 'What does Claremont Cooling do?', a: 'Air conditioning installation, repair and maintenance for homes and businesses, alongside heating, indoor air quality and preventative HVAC servicing.' },
         { q: 'How does air conditioning work?', a: 'An air conditioning system absorbs heat from inside the room through the indoor unit and releases it outside through the outdoor unit, much like a fridge. In heating mode the process runs in reverse, like an air source heat pump. There is a longer explanation in [how air conditioning heats and cools](/blog/how-air-conditioning-heats-and-cools).' },
         { q: 'Can air conditioning provide heating?', a: 'Yes. Modern systems can both heat and cool. Units that heat are heat pumps, and they are one of the more efficient ways to heat a room.' },
-        { q: 'Is air conditioning expensive to run?', a: 'Modern systems are economical. For every 1 kW of electricity used, a system provides about 3–4 kW of heating or cooling. A small-capacity unit can cost around 10–15p an hour as a rough guide. Exact cost depends on the room, the insulation and energy prices. More detail is in [running costs](/blog/what-air-conditioning-costs-to-run).' },
-        { q: 'Are the systems noisy?', a: 'Modern indoor units are very quiet. The quietest models run as low as 19 dBA in silent mode, and outdoor units typically run at around 46–49 dBA. See [how quiet modern air conditioning is](/blog/how-quiet-modern-air-conditioning-is).' },
+        { q: 'Is air conditioning expensive to run?', a: 'Modern systems are economical. For every 1 kW of electricity used, a system provides about 3–4 kW of heating or cooling. A small-capacity unit can cost around 10–15p an hour as a rough guide. Exact cost depends on the room, the insulation and energy prices. The same idea is in [how air conditioning heats and cools](/blog/how-air-conditioning-heats-and-cools).' },
+        { q: 'Are the systems noisy?', a: 'Modern indoor units are very quiet. The quietest models run as low as 19 dBA in silent mode, and outdoor units typically run at around 46–49 dBA. The figure for your room is confirmed after the E-Survey.' },
         { q: 'What is an E-Survey?', a: 'A short form, about 90 seconds to start, then a conversation with a specialist from your home or premises. We recommend a system and prepare a quotation afterwards. Nothing is booked until you decide to go ahead. Start at the [E-Survey](/#survey).' },
         { q: 'How long does installation take?', a: 'Many single-room and two-room installs are completed in a day. Larger homes and commercial jobs take longer. We tell you the likely time after the survey rather than promising one duration for every building. See [installation day](/installation-day).' },
         { q: 'Do you repair other brands?', a: 'Yes. Fault finding and repairs cover most makes, with the price agreed before any work starts. New installations are usually Daikin, because those are the ranges we specify. See [repairs](/services/air-conditioning-repair) and [brands](/brands).' },
-        { q: 'Do you cover my area?', a: 'We confirm coverage from your postcode before a survey goes ahead. A street address for the business is not published on this site yet. Details are on [locations](/locations).' },
-        { q: 'What is included in a care plan?', a: 'Planned annual servicing, with every visit kept on record. Prices are quoted for your system. There is no public price list yet. See [care plans](/care-plans).' },
+        { q: 'Do you cover my area?', a: 'We work across Greater London and the surrounding counties. The towns are listed on [locations](/locations), and we confirm your postcode before a survey goes ahead.' },
+        { q: 'What is included in a care plan?', a: 'Planned annual servicing, with every visit kept on record. The price is quoted in writing for your system. See [care plans](/care-plans).' },
         { q: 'How can I contact you?', a: `Call ${phoneLink}, email ${emailLink} or message us on ${whatsAppLink}. The [contact page](/contact) also has a form. It checks the details, then opens your email app so the message is only sent when you press send.` },
       ] },
     ],
@@ -1082,7 +1083,6 @@ export const pages: Page[] = [
     crumbs: [{ label: 'Terms' }],
     actions: [email, call],
     sections: [
-      { type: 'note', text: 'Placeholder: registered company name, company number and registered office are not published on this site yet. These terms apply to enquiries and work arranged with Claremont Cooling via the phone number and email on this website.' },
       { type: 'legal', blocks: [
         { heading: 'Quotations', paragraphs: [
           'An E-Survey is how we understand the rooms. A quotation follows it. A price mentioned in conversation is not the quotation until it is sent to you in writing.',
@@ -1126,7 +1126,10 @@ export const pages: Page[] = [
   },
 ];
 
-const byPath = new Map(pages.map((page) => [page.path, page]));
+/** Pages that are built, listed and allowed in the sitemap. Drafts stay in `pages` so they can be published by removing `draft`. */
+export const publishedPages = pages.filter((page) => !page.draft);
+
+const byPath = new Map(publishedPages.map((page) => [page.path, page]));
 
 export function getPage(slug: string[]) {
   const path = `/${slug.join('/')}`.replace(/\/+$/, '') || '/';

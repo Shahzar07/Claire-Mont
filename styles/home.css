@@ -912,7 +912,9 @@ html:not(.js) .tm__progress,
 }
 
 .tm__progress span.is-running { animation: tm-progress 7s linear forwards; }
-.tm__stage.is-paused .tm__progress span { animation-play-state: paused; }
+/* Pause is done with the Web Animations API. Toggling animation-play-state
+   from a parent class restarts the animation in Chrome and fires animationend,
+   which skips a review and can leave the bar stuck. */
 
 @keyframes tm-progress {
   to { transform: scaleX(1); }

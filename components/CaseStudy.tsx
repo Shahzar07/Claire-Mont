@@ -29,7 +29,7 @@ export default function CaseStudy() {
           </ul>
           <div className="case-study__actions" data-reveal="">
             <a className="btn btn--primary" href="/case-studies/two-room-home">Read the Case Study <svg className="icon"><use href="#i-arrow" /></svg></a>
-            <a className="btn btn--outline" href="/blog/why-we-film-projects-before-and-after">Read the Full Story</a>
+            <a className="btn btn--outline" href="/blog/how-air-conditioning-heats-and-cools">How heating and cooling works</a>
           </div>
         </div>
       </div>

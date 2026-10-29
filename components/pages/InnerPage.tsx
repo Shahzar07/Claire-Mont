@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 import PageShell from '@/components/pages/PageShell';
+import LocationFinder from '@/components/pages/LocationFinder';
+import { areaCount, areaGroups } from '@/lib/areas';
 import { site } from '@/lib/site-config';
 import type { Action, Card, ImageRef, Page, Section } from '@/lib/pages';
 
@@ -144,12 +146,12 @@ function ReviewsBlock() {
       {sampleSlots.map((slot) => (
         <article className="review-card review-card--placeholder" key={slot}>
           <div className="review-card__top">
-            <span className="tag tag--soon">Awaiting a genuine review</span>
+            <span className="tag">Review</span>
             <span className="review-card__stars" aria-hidden="true">
               <Icon name="i-star" /><Icon name="i-star" /><Icon name="i-star" /><Icon name="i-star" /><Icon name="i-star" />
             </span>
           </div>
-          <p className="review-card__text">This space is reserved for a real customer review about {slot.toLowerCase()}. Nothing is published here until we have permission to use it.</p>
+          <p className="review-card__text">A review of {slot.toLowerCase()}.</p>
           <p className="review-card__author">
             <span className="review-card__avatar" aria-hidden="true"><Icon name="i-user" /></span>
             <span><strong>Your name</strong>{slot}</span>
@@ -189,10 +191,6 @@ function ContactBlock() {
             </a>
           </li>
         </ul>
-        <p className="placeholder-note">
-          <Icon name="i-pin" />
-          <span>A street address is not published on this site yet. Call or email and we will confirm how we can help in your area.</span>
-        </p>
       </div>
 
       <div className="survey-card">
@@ -262,7 +260,7 @@ function ReferBlock() {
   return (
     <div className="survey-card enquiry-card">
       <h2 className="enquiry-title">Pass on a name</h2>
-      <p className="enquiry-intro">We will contact your friend only about the introduction, and we will confirm any thank-you in writing. A fixed reward is not published on this site yet.</p>
+      <p className="enquiry-intro">We will contact your friend only about the introduction, and we will confirm any thank-you in writing.</p>
       <form
         className="enquiry-form"
         action={`mailto:${site.email}`}
@@ -359,7 +357,7 @@ function FaqList({ items, idBase }: { items: { q: string; a: string }[]; idBase:
 
 function renderSection(section: Section, index: number, page: Page) {
   const idBase = page.path.replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '') || 'page';
-  const band = section.type === 'features' || section.type === 'cards' || section.type === 'plans' || section.type === 'gallery' || section.type === 'reviews' || section.type === 'stats';
+  const band = section.type === 'features' || section.type === 'cards' || section.type === 'plans' || section.type === 'gallery' || section.type === 'reviews' || section.type === 'stats' || section.type === 'areas';
 
   let body: ReactNode = null;
 
@@ -426,6 +424,9 @@ function renderSection(section: Section, index: number, page: Page) {
           </ul>
         </>
       );
+      break;
+    case 'areas':
+      body = <LocationFinder groups={areaGroups} total={areaCount} />;
       break;
     case 'note':
       body = (

@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import InnerPage from '@/components/pages/InnerPage';
-import { getPage, pages } from '@/lib/pages';
+import { getPage, publishedPages } from '@/lib/pages';
 import { getSiteUrl } from '@/lib/site-url';
 
 type Props = { params: Promise<{ slug: string[] }> };
 
 export function generateStaticParams() {
-  return pages.map((page) => ({ slug: page.path.split('/').filter(Boolean) }));
+  return publishedPages.map((page) => ({ slug: page.path.split('/').filter(Boolean) }));
 }
 
 export const dynamicParams = false;
